@@ -62,6 +62,14 @@ const App: React.FC = () => {
       setActiveConversationId(updatedConversations.length > 0 ? updatedConversations[0].id : null);
     }
   };
+
+  const handleRenameConversation = (id: string, newTitle: string) => {
+    setConversations(prev =>
+      prev.map(c =>
+        c.id === id ? { ...c, title: newTitle } : c
+      )
+    );
+  };
   
   const handleSendMessage = async (prompt: string, files: UploadedFile[]) => {
     let currentConversationId = activeConversationId;
@@ -91,7 +99,7 @@ const App: React.FC = () => {
               ...c,
               files: [...c.files, ...files],
               messages: [...c.messages, userMessage],
-              title: c.messages.length === 0 ? prompt.substring(0, 40) + (prompt.length > 40 ? '...' : '') : c.title,
+              title: (c.messages.length === 0 && c.title === 'New Research') ? prompt.substring(0, 40) + (prompt.length > 40 ? '...' : '') : c.title,
             }
           : c
       )
@@ -159,6 +167,7 @@ const App: React.FC = () => {
         onNewConversation={handleNewConversation}
         onSelectConversation={handleSelectConversation}
         onDeleteConversation={handleDeleteConversation}
+        onRenameConversation={handleRenameConversation}
       />
       <main className="flex-1 flex flex-col">
         <ChatView
