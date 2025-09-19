@@ -1,0 +1,5 @@
+{
+  "name": "AI Research Assistant",
+  "description": "An AI-powered research tool that allows you to upload documents and images, and ask questions about them. Your conversations are saved locally for future reference.",
+  "requestFramePermissions": []
+}
